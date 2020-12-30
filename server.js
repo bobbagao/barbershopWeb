@@ -1,14 +1,39 @@
-var express = require('express')
+var express = require('express');
 var app = express();
+var sendgrid  = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
+var bodyParser = require('body-parser');
 
-var port = process.env.PORT || 8080;
+app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser());
+// views is directory for all template files
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
-app.get('/', function(req, res) {
-	res.render('index');
-})
+var validpages = '/:param(index|hours|about|contact)?';
 
-app.listen(port, function() {
-	console.log('app running')
-})
+app.get('*', function(request, response) {
+  response.render('index.html');
+});
+
+app.post('/message',function(request,response){
+	console.log(request.toString());
+	response.end(request.toString());
+	sendgrid.send({
+	  to:       'warfieldsbarber@gmail.com',
+	  from:     request.body.email,
+	  subject:  request.body.subject,
+	  text:     'From: '+ request.body.name + ',\n' +request.body.message,
+	}, function(err, json) {
+	  if (err) { return console.error(err); }
+	  console.log(json);
+	});
+
+	response.end("yay");
+});
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});

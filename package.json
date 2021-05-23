@@ -13,6 +13,7 @@
     "bootstrap": "^5.0.0-beta1",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "izitoast": "^1.4.0",
     "jquery": "^3.5.1",
     "sendgrid": "^5.2.3"
   }

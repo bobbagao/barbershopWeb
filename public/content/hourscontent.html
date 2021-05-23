@@ -1,33 +1,75 @@
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text ">
-                        <strong>Location</strong>
-                    </h2>
-                    <hr>
-                    <div id="map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3090.2759526607942!2d-76.79942799999999!3d39.236607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c81fdce1e3e28f%3A0x99bf460914edaad2!2sWarfield&#39;s+Barber+Styling+Sln!5e0!3m2!1sen!2sus!4v1432435272853" height="400"></iframe>
-                    </div>
-
-                    <div class="col-md-4">
-                    <p>Address:</p>
-                        <strong>4882 Montgomery Road
-                            <br>Ellicott City, MD 21043</strong>
-                    <ul id="hours">
-                        <li id="sun">Sunday 10:00 am–3:00 pm</li>
-                        <li id="mon">Monday 9:30 am–6:00 pm</li>
-                        <li id="tue">Tuesday 9:30 am–6:00 pm</li>
-                        <li id="wed">Wednesday 9:30 am–6:00 pm</li>
-                        <li id="thu">Thursday 9:30 am–6:00 pm</li>
-                        <li id="fri">Friday 9:30 am–6:00 pm</li>
-                        <li id="sat">Saturday 9:30 am–4:00 pm</li>
-                        <label id="current" >&nbsp;</label>
+<div class="container">
+    <div class="row">
+        <div class="instructions">
+            <h1 class="text-center">Scheduling</h1>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="calendar col-md-8 offset-md-2">
+            <div>
+                <div class="card-header bg-primary">
+                    <ul>
+                        <li id="month" class="text-white text-uppercase text-center">
+                        </li>
+                        <li id="year" class="text-white text-uppercase text-center">
+                        </li>
                     </ul>
-                    <div class="clearfix"></div>
-                    </div>
-                    <div class="clearfix"></div>
                 </div>
+                <table class="table calendar table-bordered table-responsive-sm" id="calendar">
+                    <thead>
+                        <tr class="weekdays bg-dark">
+                          <th scope="col" class="text-white text-center">Mo</th>
+                          <th scope="col" class="text-white text-center">Tu</th>
+                          <th scope="col" class="text-white text-center">We</th>
+                          <th scope="col" class="text-white text-center">Th</th>
+                          <th scope="col" class="text-white text-center">Fr</th>
+                          <th scope="col" class="text-white text-center">Sa</th>
+                          <th scope="col" class="text-white text-center">Su</th>
+                        </tr>
+                      </thead>
+                    <tbody class="days bg-light" id="days"></tbody>
+                    <tfoot></tfoot>
+                </table>
             </div>
         </div>
+    </div>
+
+    <br><hr>
+
+    <div class="row">
+        <div class="col offset-md-1">
+            <form id="form_create_appointment">
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label class="required">Date</label>
+                        <input class="form-control date-input" type="text" id="date" data-trigger="hover" data-toggle="popover" title="Date" data-content="You can select any date from today clicking on the number in the calendar" required>
+                    </div>
+                    <div class="col form-group">
+                        <label>Description</label>
+                        <input class="form-control" type="text" id="description">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label class="required">Start Time</label>
+                        <input class="form-control time-input" type="text" id="start_time" required>
+                    </div>
+                    <div class="col form-group">
+                        <label class="required">End Time</label>
+                        <input class="form-control time-input" type="text" id="end_time" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col form-group">
+                        <button type="button" class="btn btn-warning btn-block" id="clear" onclick="clear_input()">Clear Form</button>
+                    </div>
+                    <div class="col form-group">
+                        <button type="button" class="btn btn-primary btn-block" id="submit" onclick="make_appointment()" disabled="disabled">Make Appointment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
         <script src="/js/hours.js" type="text/javascript"></script>

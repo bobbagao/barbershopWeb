@@ -10,7 +10,7 @@ html {
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('/img/bg1.png') fixed;
+    background: black;
     height: 100%;
 
     margin-bottom: 60px; /*footer*/
@@ -56,8 +56,19 @@ hr {
 .box {
     margin-bottom: 20px;
     padding: 30px 15px;
-    background: #fff;
-    background: rgba(255,255,255,0.99);
+    background: rgba(255, 255, 255, 0.99);
+}
+
+.red-box{
+    padding: 30px 15px;
+    background: rgba(247, 145, 145, 0.99);
+}
+.outline-box{
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    color: white;
+    border: solid #fff 5px;
+
 }
 
 .navbar-brand {
@@ -106,7 +117,7 @@ hr {
 
 .intro-text {
     text-transform: uppercase;
-    font-size: 1.25em;
+    font-size: 1.75em;
     font-weight: 400;
     letter-spacing: 1px;
 }
@@ -128,14 +139,47 @@ hr {
 .hide{
     display: none;
 }
+.container1 {
+    position: relative;
+    font-family: Arial;
+    margin: auto;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 80px;
+  }
+.center {
+    display: block;
+    margin: auto;
+}
+.container-center{
+
+}
+  
+.text-block {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background-color: black;
+    color: white;
+    width: 100%;
+}
+.map-block {
+    position: absolute;
+    top: 80px;
+    right: 70px;
+    background-color: white;
+    color: black;
+    width: 50%;
+}
 #map{
-    float:left;
     width: 60%;
     padding: 10px;
 }
 iframe{
     float:left;
-    width: 100%;
+    width: 50%;
     border: none;
     margin-bottom: 30px;
 
@@ -147,10 +191,8 @@ iframe{
     -webkit-box-shadow: 4px 4px 10px #000;
     box-shadow: 4px 4px 10px #000;
 
-
 }
 ul#hours{
-    float:left;
     list-style-type: none;
     margin: 14px;
     margin-top: 40px;

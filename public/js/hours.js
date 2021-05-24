@@ -23,12 +23,6 @@ $(function () {
             timeout: 20000,
         });
     }
-
-    $('#description').inputmask('Regex', {
-        regex: "(?:[\\w\\d]+(\\s)*){1,5}",
-        clearIncomplete: true
-    });
-
     $("#start_time").inputmask("hh:mm", {
         placeholder: "hh:mm (24h)",
         alias: "datetime",
@@ -133,8 +127,8 @@ $("#days td.active").on("click", function () {
     } else {
         $("#submit").prop('disabled', false);
     }
-    if ($("#description").val() == null || $("#description").val() == '') {
-        $("#description").focus();
+    if ($("#barbers").val() == null || $("#barbers").val() == '') {
+        $("#barbers").focus();
     } else {
         $("#submit").focus();
     }
@@ -155,11 +149,11 @@ function make_appointment() {
     if (is_empty() == false) {
         is_past_date();
         compare();
-        if (is_overlap() == false) {
+        if (is_overlap() == false && shop_closed()) {
             var appointment = {
                 id: $("#date").inputmask('unmaskedvalue')+$("#start_time").inputmask('unmaskedvalue')+$("#end_time").inputmask('unmaskedvalue'),
                 date: $("#date").val(),
-                description: $("#description").val(),
+                barber: $("#barbers").val(),
                 start_time: $("#start_time").val(),
                 end_time: $("#end_time").val(),
             };
@@ -178,7 +172,7 @@ function make_appointment() {
             clear_input();
             iziToast.error({
                 title: 'Error',
-                message: "This appointment is overlaping another one",
+                message: "This barber is unavailable at this time",
                 overlay: true,
                 zindex: 999,
                 position: 'center',
@@ -201,7 +195,7 @@ $("#end_time, #start_time").focusout(function () {
     compare();
 });
 
-$("#end_time, #start_time, #date").keyup(function () {
+$("#end_time, #start_time, #date, #barbers").on("keyup", function () {
     if (is_empty() == true) {
         $("#submit").prop('disabled', true);
     } else {
@@ -211,17 +205,45 @@ $("#end_time, #start_time, #date").keyup(function () {
 
 function clear_input() {
     $("#date").val('');
-    $("#description").val('');
+    $("#barbers").val('');
     $("#start_time").val('');
     $("#end_time").val('');
     $("#submit").prop('disabled', true);
 }
+function shop_closed() {
+    var startTime = get_Date($("#start_time").val());
+    var endTime = get_Date( $("#end_time").val());
+    var arrDate = GetDateInput();
+    var selected_date = new Date(arrDate[2], arrDate[1]-1, arrDate[0], 0, 0, 0, 0);
+    dow=selected_date.getDay();
+    shr=startTime.getHours();
+    smin=startTime.getMinutes();
+    ehr=endTime.getHours();
+    emin=endTime.getMinutes();
+    if(!((dow==0 && shr>=10 && ((ehr<=14 && emin<= 59) || (ehr==15 && emin == 0))) ||
+        (dow==6 && ((shr==9 && smin>=30) || (shr>9 && smin>=0)) && ((ehr==18 && emin == 0) || (ehr < 18))) ||
+        (dow>0 && dow<6 && ((shr == 9 && smin >= 30) || shr > 9) && ((ehr == 16 && emin == 0) || (ehr < 16))))){
+            iziToast.error({
+                title: 'Error',
+                message: "Warfields is closed at this time",
+                overlay: true,
+                zindex: 999,
+                position: 'center',
+                timeout: 3000,
+            });
+            return false;
+    }else{
+        return true;
+    }
+}
+
 
 function is_empty() {
     if (
         ($("#date").val() == null || $("#date").val() == '') ||
         ($("#start_time").val() == null || $("#start_time").val() == '') ||
-        ($("#end_time").val() == null || $("#end_time").val() == '')
+        ($("#end_time").val() == null || $("#end_time").val() == '') ||
+        ($("#barbers").val() == null || $("#barbers").val() == '')
     ) {
         return true;
     }
@@ -256,6 +278,18 @@ function compare() {
             timeout: 2000,
         });
     }
+    if (endTime-startTime > 3600010){
+        $("#submit").prop('disabled', true);
+        clear_input();
+        iziToast.warning({
+            title: 'Caution',
+            message: "Appointment is longer than an hour",
+            overlay: true,
+            zindex: 999,
+            position: 'center',
+            timeout: 2000,
+        });
+    }
 }
 
 function is_past_date() {
@@ -273,10 +307,11 @@ function GetDateInput() {
     return date.split("/");
 }
 
-function is_overlap(sTime, eTime) {
-    if (sTime == undefined || eTime == undefined) {
+function is_overlap(sTime, eTime, barb) {
+    if (sTime == undefined || eTime == undefined || barb == undefined) {
         sTime = $("#start_time").val();
         eTime = $("#end_time").val();
+        barb = $("#barbers").val();
     }
     if (+get_Date(sTime) < +get_Date(eTime)) {
         var timeList = localStorage.getItem("tbAppointment");
@@ -290,11 +325,11 @@ function is_overlap(sTime, eTime) {
             const element = timeList[i];
             if (element.date == $("#date").val()) {
                 if (
-                    sTime > element.start_time && sTime < element.end_time ||
+                    (sTime > element.start_time && sTime < element.end_time ||
                     eTime > element.start_time && eTime < element.end_time ||
                     sTime < element.start_time && eTime >= element.end_time ||
                     sTime <= element.start_time && eTime > element.end_time ||
-                    sTime == element.start_time && eTime == element.end_time
+                    sTime == element.start_time && eTime == element.end_time) && (barb == element.barber)
 
                 ) {
                     return true;
@@ -336,7 +371,7 @@ function print(clear = false, init = false, edit = false) {
                     `
                     <tr>
                         <td class="text-center align-middle">${element.date}</td>
-                        <td class="text-center align-middle">${element.description}</td>
+                        <td class="text-center align-middle">${element.barber}</td>
                         <td class="text-center align-middle">${element.start_time}</td>
                         <td class="text-center align-middle">${element.end_time}</td>
                         <td class="text-center align-middle">
@@ -412,7 +447,7 @@ function edit_appointment(id){
             const element = data[i];
             if (element.id == id) {
                 $("#date").val(element.date);
-                $("#description").val(element.description);
+                $("#barbers").val(element.barber);
                 $("#start_time").val(element.start_time);
                 $("#end_time").val(element.end_time);
                 $("#submit").prop('disabled', false);
@@ -451,24 +486,26 @@ function delete_appointment(id){
 
 
 function put_badges_new(cell) {
-    var data = localStorage.getItem("tbAppointment");
-    data = JSON.parse(data);
-    if (data[0] !== null) {
-        let counter = 0;
-        for (let i = 0; i < data.length; i++) {
-            const element = data[i];
-            if (cell.getAttribute("data-day") == element.date.slice(0,2)) {
-                counter++;
-            }
-        }
+    window.onload = function(){
+        var data = localStorage.getItem("tbAppointment");
+        data = JSON.parse(data);
+        if (data[0] !== null) {
+                let counter = 0;
+                for (let i = 0; i < data.length; i++) {
+                const element = data[i];
+                if (cell.getAttribute("data-day") == element.date.slice(0,2)) {
+                        counter++;
+                }
+                }
 
-        if (counter >= 1) {
-            cell.classList.add("badge1");
-            cell.setAttribute('data-badge', counter);
-        }
-        if (counter <= 0) {
-            cell.classList.remove("badge1");
-            cell.removeAttribute('data-badge');
+                if (counter >= 1) {
+                cell.classList.add("badge1");
+                cell.setAttribute('data-badge', counter);
+                }
+                if (counter <= 0) {
+                cell.classList.remove("badge1");
+                cell.removeAttribute('data-badge');
+                }
         }
     }
 }

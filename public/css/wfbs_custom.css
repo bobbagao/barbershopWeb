@@ -20,7 +20,95 @@ body {
     -o-background-size: cover;
 */    
 }
+* {box-sizing: border-box;}
+.card-header * {list-style-type: none;}
 
+.required:after{
+    content:"*";
+    font-weight:bold;
+    color: red;
+    margin-left: 5px;
+}
+
+.card-header {
+    padding: 50px 25px;
+    width: 100%;
+}
+
+.card-header ul {
+    margin: 0;
+    padding: 0;
+}
+
+.card-header ul li {
+    color: white;
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: white;
+}
+
+.calendar {
+    margin: 0 auto;
+
+}
+.days {
+    padding: 10px 0;
+    background-color: white;
+}
+.container{
+    background-color: white;
+}
+.badge1 {
+    position:relative;
+}
+.badge1[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: -0.5px;
+    right: -0.5px;
+    font-size: .7em;
+    background: red;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
+}
+
+@media screen and (max-width:720px) {
+
+    .weekdays td,
+    .days td {
+        width: 13.1%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    .weekdays td,
+    .days td {
+        width: 12.5%;
+    }
+
+    .days td .active {
+        padding: 2px;
+    }
+}
+
+@media screen and (max-width: 290px) {
+
+    .weekdays td,
+    .days td {
+        width: 12.2%;
+    }
+}
 h1,
 h2,
 h3,
@@ -51,6 +139,8 @@ hr {
 }
 
 .row{
+    width: 100%;
+    text-align: center;
 }
 
 .box {
@@ -152,9 +242,7 @@ hr {
     display: block;
     margin: auto;
 }
-.container-center{
 
-}
   
 .text-block {
     position: absolute;
@@ -318,93 +406,5 @@ footer p {
         content: '';
         display: table;
         clear: both;
-    }
-}
-* {box-sizing: border-box;}
-.card-header * {list-style-type: none;}
-
-.required:after{
-    content:"*";
-    font-weight:bold;
-    color: red;
-    margin-left: 5px;
-}
-
-.card-header {
-    padding: 50px 25px;
-    width: 100%;
-}
-
-.card-header ul {
-    margin: 0;
-    padding: 0;
-}
-
-.card-header ul li {
-    color: white;
-    font-size: 20px;
-    letter-spacing: 3px;
-}
-
-.weekdays {
-    margin: 0;
-    padding: 10px 0;
-    background-color: white;
-}
-
-.calendar {
-    margin: 0 auto;
-}
-.days {
-    padding: 10px 0;
-}
-.days td{
-    background-color: white;
-}
-
-.badge1 {
-    position:relative;
-}
-.badge1[data-badge]:after {
-    content: attr(data-badge);
-    position: absolute;
-    top: -0.5px;
-    right: -0.5px;
-    font-size: .7em;
-    background: red;
-    color: white;
-    width: 18px;
-    height: 18px;
-    text-align: center;
-    line-height: 18px;
-    border-radius: 50%;
-    box-shadow: 0 0 1px #333;
-}
-
-@media screen and (max-width:720px) {
-
-    .weekdays td,
-    .days td {
-        width: 13.1%;
-    }
-}
-
-@media screen and (max-width: 420px) {
-
-    .weekdays td,
-    .days td {
-        width: 12.5%;
-    }
-
-    .days td .active {
-        padding: 2px;
-    }
-}
-
-@media screen and (max-width: 290px) {
-
-    .weekdays td,
-    .days td {
-        width: 12.2%;
     }
 }

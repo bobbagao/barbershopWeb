@@ -195,7 +195,7 @@ $("#end_time, #start_time").focusout(function () {
     compare();
 });
 
-$("#end_time, #start_time, #date, #barbers").on("keyup", function () {
+$("#end_time, #start_time, #date, #barbers").on("keyup, click", function () {
     if (is_empty() == true) {
         $("#submit").prop('disabled', true);
     } else {

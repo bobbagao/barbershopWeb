@@ -10,7 +10,9 @@ html {
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: black;
+    background-image: url(../img/splashbg.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100%;
 
     margin-bottom: 60px; /*footer*/
@@ -138,11 +140,6 @@ hr {
     display: none;
 }
 
-.row{
-    width: 100%;
-    text-align: center;
-}
-
 .box {
     margin-bottom: 20px;
     padding: 30px 15px;
@@ -211,6 +208,12 @@ hr {
     font-weight: 400;
     letter-spacing: 1px;
 }
+.service-text{
+    text-transform: uppercase;
+    font-size: 1.75em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
 
 .img-border {
     float: none;
@@ -253,21 +256,32 @@ hr {
     color: white;
     width: 100%;
 }
+.intro-block-text{
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.location-text{
+    text-transform: uppercase;
+    font-size: 1.75em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
 .map-block {
     position: absolute;
     top: 80px;
     right: 70px;
     background-color: white;
     color: black;
-    width: 50%;
+    width: 40%;
 }
 #map{
     width: 60%;
     padding: 10px;
 }
 iframe{
-    float:left;
-    width: 50%;
+    width: 100%;
     border: none;
     margin-bottom: 30px;
 
@@ -406,5 +420,143 @@ footer p {
         content: '';
         display: table;
         clear: both;
+    }
+}
+* {box-sizing: border-box;}
+.card-header * {list-style-type: none;}
+
+.required:after{
+    content:"*";
+    font-weight:bold;
+    color: red;
+    margin-left: 5px;
+}
+
+.card-header {
+    padding: 50px 25px;
+    width: 100%;
+}
+
+.card-header ul {
+    margin: 0;
+    padding: 0;
+}
+
+.card-header ul li {
+    color: white;
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: white;
+}
+
+.calendar {
+    margin: 0 auto;
+}
+.days {
+    padding: 10px 0;
+}
+.days td{
+    background-color: white;
+}
+
+.badge1 {
+    position:relative;
+}
+.badge1[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: -0.5px;
+    right: -0.5px;
+    font-size: .7em;
+    background: red;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
+}
+
+@media screen and (max-width:720px) {
+
+    .weekdays td,
+    .days td {
+        width: 13.1%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    .weekdays td,
+    .days td {
+        width: 12.5%;
+    }
+
+    .days td .active {
+        padding: 2px;
+    }
+}
+
+@media screen and (max-width: 290px) {
+
+    .weekdays td,
+    .days td {
+        width: 12.2%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .box{
+        margin-top: 20px;
+        margin-bottom: 30px;
+        padding: 30px 15px;
+        background: rgba(255, 255, 255, 0.99);
+    }
+    .text-block {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        background-color: black;
+        color: white;
+        text-size-adjust: auto;
+        padding-bottom: 20px;
+    }
+    .container0 {
+        position: relative;
+        font-family: Arial;
+        padding-bottom: 150px;
+    }
+    .container1 {
+        position: relative;
+        font-family: Arial;
+        margin: auto;
+        padding-bottom: 150px;
+    }
+    .intro-text {
+        text-transform: uppercase;
+        font-size: 1em;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+    .intro-block-text{
+        text-transform: uppercase;
+        font-size: 0.75em;
+        font-weight: 400;
+        letter-spacing: 1px;
+        line-height: 120%;
+    }
+    .location-text{
+        text-transform: uppercase;
+        font-size: 1.75em;
+        font-weight: 400;
+        letter-spacing: 1px;
+        margin: auto;
     }
 }

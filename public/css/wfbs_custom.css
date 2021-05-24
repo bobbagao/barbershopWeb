@@ -55,7 +55,7 @@ body {
 }
 
 .calendar {
-    margin: 0 auto;
+    left: 17%;
 
 }
 .days {
@@ -257,7 +257,6 @@ a{
     background-color: white;
     color: black;
     padding: 14px 28px;
-    font-family: "Helvetica Neue";
     font-size: 16px;
     cursor: pointer;
   }
@@ -597,6 +596,10 @@ footer p {
         font-family: Arial;
         margin: auto;
         padding-bottom: 150px;
+    }
+    .calendar {
+        right: 200%;
+    
     }
     .intro-text {
         text-transform: uppercase;

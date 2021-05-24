@@ -57,7 +57,9 @@ body {
 
 .calendar {
     left: 17%;
-
+}
+#today{
+    background-color: blue;
 }
 .days {
     padding: 10px 0;

@@ -97,6 +97,7 @@ function showCalendar(month, year) {
                 let cellText = document.createTextNode(date);
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     $(cell).addClass("text-white active bg-primary today text-center font-weight-bold");
+                    $(cell).attr('id', 'today')
                     $(cell).attr('data-day', date);
                     put_badges_new(cell);
                 } else if (date < today.getDate() && year <= today.getFullYear() && month <= today.getMonth()){

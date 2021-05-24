@@ -10,7 +10,9 @@ html {
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: black;
+    background-image: url(../img/splashbg.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100%;
 
     margin-bottom: 60px; /*footer*/
@@ -48,9 +50,6 @@ hr {
 .brand,
 .address-bar {
     display: none;
-}
-
-.row{
 }
 
 .box {
@@ -121,6 +120,12 @@ hr {
     font-weight: 400;
     letter-spacing: 1px;
 }
+.service-text{
+    text-transform: uppercase;
+    font-size: 1.75em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
 
 .img-border {
     float: none;
@@ -165,21 +170,32 @@ hr {
     color: white;
     width: 100%;
 }
+.intro-block-text{
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.location-text{
+    text-transform: uppercase;
+    font-size: 1.75em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
 .map-block {
     position: absolute;
     top: 80px;
     right: 70px;
     background-color: white;
     color: black;
-    width: 50%;
+    width: 40%;
 }
 #map{
     width: 60%;
     padding: 10px;
 }
 iframe{
-    float:left;
-    width: 50%;
+    width: 100%;
     border: none;
     margin-bottom: 30px;
 
@@ -406,5 +422,55 @@ footer p {
     .weekdays td,
     .days td {
         width: 12.2%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .box{
+        margin-top: 20px;
+        margin-bottom: 30px;
+        padding: 30px 15px;
+        background: rgba(255, 255, 255, 0.99);
+    }
+    .text-block {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        background-color: black;
+        color: white;
+        text-size-adjust: auto;
+        padding-bottom: 20px;
+    }
+    .container0 {
+        position: relative;
+        font-family: Arial;
+        padding-bottom: 150px;
+    }
+    .container1 {
+        position: relative;
+        font-family: Arial;
+        margin: auto;
+        padding-bottom: 150px;
+    }
+    .intro-text {
+        text-transform: uppercase;
+        font-size: 1em;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+    .intro-block-text{
+        text-transform: uppercase;
+        font-size: 0.75em;
+        font-weight: 400;
+        letter-spacing: 1px;
+        line-height: 120%;
+    }
+    .location-text{
+        text-transform: uppercase;
+        font-size: 1.75em;
+        font-weight: 400;
+        letter-spacing: 1px;
+        margin: auto;
     }
 }

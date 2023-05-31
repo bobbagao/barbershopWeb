@@ -3,7 +3,7 @@ var app = express();
 var sendgrid  = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 var bodyParser = require('body-parser');
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 80));
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({

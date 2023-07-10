@@ -1,15 +1,11 @@
 var express = require('express');
 var app = express();
-var cors = require('cors')
-const https = require('https');
-const fs = require('fs');
 var sendgrid  = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 var bodyParser = require('body-parser');
 
 app.set('port', (process.env.PORT || 80));
 
 app.use(express.static(__dirname + '/public'));
-app.use(cors())
 app.use(bodyParser.urlencoded({
     extended: true
   }));
@@ -44,12 +40,3 @@ app.post('/message',function(request,response){
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-// const httpsServer = https.createServer({
-// 	key: fs.readFileSync('/etc/letsencrypt/live/warfieldsbarbershop.com/privkey.pem'),
-// 	cert: fs.readFileSync('/etc/letsencrypt/live/warfieldsbarbershop.com/fullchain.pem'),
-// }, app);
-  
-  
-// httpsServer.listen(443, () => {
-// 	console.log('HTTPS Server running on port 443');
-// });

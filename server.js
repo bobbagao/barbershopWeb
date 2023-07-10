@@ -41,12 +41,15 @@ app.post('/message',function(request,response){
 	response.end("yay");
 });
 
-const httpsServer = https.createServer({
-	key: fs.readFileSync('/etc/letsencrypt/live/warfieldsbarbershop.com/privkey.pem'),
-	cert: fs.readFileSync('/etc/letsencrypt/live/warfieldsbarbershop.com/fullchain.pem'),
-}, app);
-  
-  
-httpsServer.listen(443, () => {
-	console.log('HTTPS Server running on port 443');
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
+// const httpsServer = https.createServer({
+// 	key: fs.readFileSync('/etc/letsencrypt/live/warfieldsbarbershop.com/privkey.pem'),
+// 	cert: fs.readFileSync('/etc/letsencrypt/live/warfieldsbarbershop.com/fullchain.pem'),
+// }, app);
+  
+  
+// httpsServer.listen(443, () => {
+// 	console.log('HTTPS Server running on port 443');
+// });
